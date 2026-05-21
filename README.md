@@ -26,6 +26,27 @@ The top 10 addresses control 99.7% of all voting power,
 suggesting that Uniswap DAO governance is effectively controlled
 by a small oligarchy despite its decentralized design.
 
+## Extended Analysis: ETH Native Transfer Tracking
+
+To verify the fund flow chain described in on-chain analyst EnHeng's report,
+we extended the analysis to include ETH native transfers across the same 4 addresses.
+
+**Results:**
+- No direct ETH transfers found between the 4 addresses (1000+ records per address)
+- Combined with ERC20 analysis: the described fund flow chain cannot be verified
+  using Etherscan API alone
+- Aster_Related address shows anomalous behavior: 1000 incoming transactions,
+  0 outgoing, max value 0.1 ETH — inconsistent with a market maker wallet,
+  more likely a contract or crowdfunding address
+- Gate_Deposit shows institutional-scale activity: single transaction of 745 ETH
+  (~$1.6M), consistent with market maker operations
+
+**Conclusion:**
+Professional on-chain analysis requires deeper data sources beyond block explorers.
+Single-tool analysis has inherent blind spots. Honest documentation of limitations
+is itself a contribution to the field.
+
+
 ## Data & Methodology
 
 - **Data source**: Snapshot GraphQL API (hub.snapshot.org)
