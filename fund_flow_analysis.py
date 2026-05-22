@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-output_dir = "E:\\PYTHON练习册\\dao_research"
+output_dir = "******"
 
 df = pd.read_csv(
     os.path.join(output_dir, "fund_flow_raw.csv"),
