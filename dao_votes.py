@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 
 url = "https://hub.snapshot.org/graphql"
-output_dir = "E:\\PYTHON练习册\\dao_research"
+output_dir = "******"
 csv_input_path = os.path.join(output_dir, "uniswap_proposals.csv")
 
 # 1. 健壮地读取已有的提案数据
