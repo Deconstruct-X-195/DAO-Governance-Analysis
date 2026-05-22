@@ -4,7 +4,7 @@ import matplotlib
 import os
 
 matplotlib.rcParams['font.family'] = 'DejaVu Sans'
-output_dir = "E:\\PYTHON练习册\\dao_research"
+output_dir = "******"
 
 df = pd.read_csv(
     os.path.join(output_dir, "dao_gini_analysis.csv"),
