@@ -2,7 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 
-output_dir = "E:\\PYTHON练习册\\dao_research"
+output_dir = "*****"
 
 # 1. 安全读取投票数据
 try:
