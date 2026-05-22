@@ -38,7 +38,7 @@ df["scores_total_M"] = (df["scores_total"] / 1e6).round(2)
 df["avg_tokens_per_voter_M"] = (df["avg_tokens_per_voter"] / 1e6).round(2)
 
 # 保存CSV
-output_dir = "E:\\PYTHON练习册\\dao_research"
+output_dir = "******"
 os.makedirs(output_dir, exist_ok=True)
 csv_path = os.path.join(output_dir, "uniswap_proposals.csv")
 df.to_csv(csv_path, index=False, encoding="utf-8-sig")
