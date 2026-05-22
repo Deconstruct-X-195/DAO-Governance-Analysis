@@ -3,8 +3,8 @@ import pandas as pd
 import os
 import time
 
-API_KEY = "113RPPW4YE9DK9G916FXMEBF1CN55ZE354"
-output_dir = "E:\\PYTHON练习册\\dao_research"
+API_KEY = "*******"
+output_dir = "******"
 
 addresses = {
     "Gate_Deposit": "0x6455327F820eDD69c4Cd665b995E0fEC679d7F9E",
