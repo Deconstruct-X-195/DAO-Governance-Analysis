@@ -1,3 +1,53 @@
+# DAO Governance Power Concentration Analysis
+
+An empirical analysis of voting power distribution in Uniswap DAO governance,
+examining whether decentralized autonomous organizations achieve genuine
+decentralization in practice. Extended to include on-chain fund flow tracking
+to verify market maker activity reports.
+
+## Research Questions
+
+1. Do DAOs governed by token-weighted voting achieve decentralized
+   decision-making, or does governance power concentrate among a small number
+   of addresses — consistent with Michels' Iron Law of Oligarchy?
+
+2. Can on-chain fund flow chains described by analysts be independently
+   verified using public blockchain data?
+
+## Key Findings
+
+### Part 1: DAO Governance Concentration
+
+Analyzing 5 recent Uniswap governance proposals via Snapshot API:
+
+| Metric | Value |
+|--------|-------|
+| Average Gini Coefficient | 0.968 |
+| Top 10 addresses control | 99.7% of voting power |
+| Average voters per proposal | ~245 addresses |
+
+A Gini coefficient of 0.968 indicates near-complete concentration —
+higher than the wealth inequality of any country on Earth.
+The top 10 addresses control 99.7% of all voting power,
+suggesting that Uniswap DAO governance is effectively controlled
+by a small oligarchy despite its decentralized design.
+
+This is consistent with Michels' Iron Law of Oligarchy: any organization,
+however democratic its origins, tends toward oligarchic control.
+
+### Part 2: Fund Flow Tracking — Three-Layer Verification
+
+We attempted to verify a fund flow chain described by on-chain analyst EnHeng,
+who reported that Wintermute was actively market-making $LAB token through
+the following address chain:
+
+Gate_Deposit (0x6455...F9E)
+↓
+Split_1 (0xec01...Bd1a5)
+↓
+Split_2 (0x1E03...76bc)
+↓
+Aster_Related (0x1284...974)
 We conducted three independent verification layers:
 
 **Layer 1 — ERC20 Token Transfers (1000 records per address):**
@@ -85,3 +135,7 @@ in decentralized organizations, and by on-chain analyst EnHeng's public
 market analysis. Both point to the same structural tendency: decentralized
 systems consistently produce centralized outcomes through rational apathy,
 capital concentration, and information asymmetry.
+
+
+
+
