@@ -1,76 +1,39 @@
-# DAO Governance Power Concentration Analysis
+We conducted three independent verification layers:
 
-An empirical analysis of voting power distribution in Uniswap DAO governance,
-examining whether decentralized autonomous organizations achieve genuine
-decentralization in practice. Extended to include on-chain fund flow tracking
-to verify market maker activity reports.
-
-## Research Questions
-
-1. Do DAOs governed by token-weighted voting achieve decentralized
-   decision-making, or does governance power concentrate among a small number
-   of addresses — consistent with Michels' Iron Law of Oligarchy?
-
-2. Can on-chain fund flow chains described by analysts be independently
-   verified using public blockchain data?
-
-## Key Findings
-
-### Part 1: DAO Governance Concentration
-
-Analyzing 5 recent Uniswap governance proposals via Snapshot API:
-
-| Metric | Value |
-|--------|-------|
-| Average Gini Coefficient | 0.968 |
-| Top 10 addresses control | 99.7% of voting power |
-| Average voters per proposal | ~245 addresses |
-
-A Gini coefficient of 0.968 indicates near-complete concentration —
-higher than the wealth inequality of any country on Earth.
-The top 10 addresses control 99.7% of all voting power,
-suggesting that Uniswap DAO governance is effectively controlled
-by a small oligarchy despite its decentralized design.
-
-This is consistent with Michels' Iron Law of Oligarchy: any organization,
-however democratic its origins, tends toward oligarchic control.
-
-### Part 2: Fund Flow Tracking — Verifying On-Chain Analyst Reports
-
-We attempted to verify a fund flow chain described by on-chain analyst EnHeng,
-who reported that Wintermute was actively market-making $LAB token through
-the following address chain:
-
-Gate_Deposit (0x6455...F9E)
-↓
-Split_1 (0xec01...Bd1a5)
-↓
-Split_2 (0x1E03...76bc)
-↓
-Aster_Related (0x1284...974)
-
-
-**ERC20 Token Transfer Analysis (1000 records per address):**
+**Layer 1 — ERC20 Token Transfers (1000 records per address):**
 - No direct ERC20 transfers found between the 4 addresses
 - Split_1 and Split_2 primarily operate LIT and BIO tokens, not $LAB
 - Aster_Related shows only 6 ERC20 records, extremely low activity
 
-**ETH Native Transfer Analysis (1000 records per address):**
+**Layer 2 — ETH Native Transfers (1000 records per address):**
 - No direct ETH transfers found between the 4 addresses
-- Gate_Deposit: 745 ETH single transaction (~$1.6M), institutional scale confirmed
-- Aster_Related: 1000 incoming, 0 outgoing, max 0.1 ETH per tx —
-  inconsistent with market maker wallet, likely a contract or crowdfunding address
+- Gate_Deposit: single transaction of 745 ETH (~$1.6M), institutional scale
+- Aster_Related: 1000 incoming, 0 outgoing, max 0.1 ETH — not a market
+  maker wallet, likely a contract or crowdfunding address
 
-**Conclusion:**
-The described fund flow chain cannot be independently verified using
-Etherscan API public data alone. Possible explanations:
-- Internal contract calls not captured by standard API endpoints
-- Intermediate hop addresses not included in the original report
-- EnHeng may have used proprietary or commercial on-chain tools
+**Layer 3 — Internal Contract Calls:**
+- Split_2 receives large ETH amounts (40–100 ETH per call) from
+  0x3B4D794a66304F130a4Db8F2551B0070dFCf5ca7
+- This address is identified as **Lighter: ZkLighter** — a ZK-based DEX contract
+- Split_2's ETH source is a DEX, NOT Gate_Deposit
+- This directly contradicts the Gate→Split_2 link in EnHeng's chain
 
-Professional on-chain analysis requires deeper data sources beyond
-public block explorers. Honest documentation of analytical limitations
-is itself a contribution to the field.
+**Final Conclusion:**
+Across all three verification layers, the described fund flow chain
+Gate→Split_1→Split_2→Aster cannot be independently verified.
+
+The critical finding: Split_2's primary ETH source is ZkLighter DEX,
+not Gate_Deposit. EnHeng's chain either:
+1. Relies on data sources beyond public Etherscan API
+2. Contains intermediate hop addresses not included in the report
+3. May conflate separate market-making operations across different tokens
+
+**Methodological Insight:**
+Professional on-chain analysis requires multi-layer verification.
+Single-tool or single-layer analysis produces systematically incomplete
+results. The honest documentation of these limitations is itself a
+contribution — it defines the boundary conditions of public blockchain
+forensics.
 
 ## Data & Methodology
 
@@ -79,7 +42,7 @@ is itself a contribution to the field.
 - **DAO Space**: uniswapgovernance.eth
 - **Proposals analyzed**: 5 most recent closed proposals
 - **Addresses tracked**: 4 addresses from EnHeng's report
-- **Transfer types**: ERC20 token transfers + ETH native transfers
+- **Transfer types**: ERC20 + ETH native + internal contract calls
 
 ## Files
 
@@ -92,21 +55,22 @@ is itself a contribution to the field.
 | fund_flow.py | Fetch ERC20 token transfers for tracked addresses |
 | fund_flow_analysis.py | Analyze cross-address fund flows (ERC20) |
 | fund_flow_eth.py | Fetch and analyze ETH native transfers |
+| fund_flow_internal.py | Fetch and analyze internal contract calls |
 | uniswap_proposals.csv | Raw proposal data |
 | uniswap_votes.csv | Raw vote records |
 | dao_gini_analysis.csv | Computed concentration metrics |
 | fund_flow_raw.csv | Raw ERC20 transfer data |
 | fund_flow_eth.csv | Raw ETH native transfer data |
+| fund_flow_internal.csv | Raw internal contract call data |
 | dao_power_concentration.png | Governance concentration visualization |
 
 ## Theoretical Framework
 
-This project is grounded in the observation that decentralization exists
-on a spectrum rather than as a binary state:
+Decentralization exists on a spectrum rather than as a binary state:
 
 - **Bitcoin**: Most decentralized — rules encoded in immutable code,
   founder disappeared, no entity can modify the 21M cap
-- **Ethereum**: Hybrid — code rules plus limited human influence (Vitalik/EF)
+- **Ethereum**: Hybrid — code rules plus limited human influence
 - **Uniswap/DeFi**: Rules modifiable by token holders, empirically
   controlled by ~10 addresses (Gini 0.968)
 - **DAOs**: Named decentralized, functionally oligarchic
@@ -121,9 +85,3 @@ in decentralized organizations, and by on-chain analyst EnHeng's public
 market analysis. Both point to the same structural tendency: decentralized
 systems consistently produce centralized outcomes through rational apathy,
 capital concentration, and information asymmetry.
-
-
-
-
-
-
