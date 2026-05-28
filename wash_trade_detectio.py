@@ -4,7 +4,7 @@ import os
 import time
 from collections import defaultdict
 
-API_KEY = "113RPPW4YE9DK9G916FXMEBF1CN55ZE354"
+API_KEY = "*******"
 output_dir = "E:\\PYTHON练习册\\dao_research"
 
 # 用Uniswap的PEPE/ETH池子作为分析对象
